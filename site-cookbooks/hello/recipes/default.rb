@@ -75,20 +75,34 @@ end
 end
 
 
-execute "rbenv install 2.0.0-p195" do
-#  command "/usr/local/rbenv/bin/rbenv rbenv install 2.0.0-p195"
-  command "/usr/local/rbenv/bin/rbenv install 2.0.0-p195"
+#execute "rbenv install 2.0.0-p195" do
+##  command "/usr/local/rbenv/bin/rbenv rbenv install 2.0.0-p195"
+#  command "/usr/local/rbenv/bin/rbenv install 2.0.0-p195"
+#  user 'root'
+##  not_if { ::File.exists?("/root/.rbenv/versions/2.0.0-p195") }
+#  not_if { ::File.exists?("/usr/local/rbenv/versions/2.0.0-p195") }
+#
+#end
+#
+#execute "rbenv global 2.0.0-p195" do
+##  command "rbenv global 2.0.0-p195"
+#  command "/usr/local/rbenv/bin/rbenv global 2.0.0-p195"
+#  action :run
+#end
+
+execute "rbenv install 2.0.0-p353" do
+  command "/usr/local/rbenv/bin/rbenv install 2.0.0-p353"
   user 'root'
-#  not_if { ::File.exists?("/root/.rbenv/versions/2.0.0-p195") }
-  not_if { ::File.exists?("/usr/local/rbenv/versions/2.0.0-p195") }
+  not_if { ::File.exists?("/usr/local/rbenv/versions/2.0.0-p353") }
 
 end
 
-execute "rbenv global 2.0.0-p195" do
-#  command "rbenv global 2.0.0-p195"
-  command "/usr/local/rbenv/bin/rbenv global 2.0.0-p195"
+execute "rbenv global 2.0.0-p353" do
+  command "/usr/local/rbenv/bin/rbenv global 2.0.0-p353"
   action :run
 end
+
+
 
 #execute "rbenv global 2.0.0-p195" do
 #  command "rbenv global 2.0.0-p195"
@@ -99,5 +113,5 @@ execute "rbenv rehash" do
 #  command "rbenv rehash"
   command "/usr/local/rbenv/bin/rbenv rehash"
   action :run
-end   
+end
 
