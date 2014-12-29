@@ -8,6 +8,18 @@
 #
 log "hello world"
 
+package "vim-enhanced" do
+  action :install
+end
+
+template "resolv.conf" do
+  path "/etc/resolv.conf"
+  source "resolv.conf.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
 package "zsh" do
  action :install
 end
@@ -23,14 +35,14 @@ git "/usr/local/rbenv" do
 #action :checkout
 end
 
-bash 'add_epel' do
-  user 'root'
-  code <<-EOC
-    rpm -ivh http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sed -i -e "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/epel.repo
-  EOC
-  creates "/etc/yum.repos.d/epel.repo"
-end
+#bash 'add_epel' do
+#  user 'root'
+#  code <<-EOC
+#    rpm -ivh http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+#    sed -i -e "s/enabled *= *1/enabled=0/g" /etc/yum.repos.d/epel.repo
+#  EOC
+#  creates "/etc/yum.repos.d/epel.repo"
+#end
 
 yum_repository 'epel' do
   description 'Extra Packages for Enterprise Linux'
@@ -115,3 +127,13 @@ execute "rbenv rehash" do
   action :run
 end
 
+directory '~/rails_projects' do
+	owner 'vagrant'
+	mode '0755'
+	action :create
+end
+
+gem_package 'rails' do
+  action :install
+  version '4.0.5'
+end
